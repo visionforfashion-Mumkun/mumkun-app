@@ -3,11 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mümkün — Business Manager</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<title>Mumkun - Business Manager</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Tajawal:wght@400;500;700&display=swap');
-
 :root{
   --bg:#FAF6F1;
   --surface:#FFFFFF;
@@ -26,41 +23,28 @@
 }
 *{box-sizing:border-box;}
 html,body{margin:0;padding:0;}
-body{background:var(--bg);color:var(--ink);font-family:'Tajawal',sans-serif;min-height:100vh;}
+body{background:var(--bg);color:var(--ink);font-family:sans-serif;min-height:100vh;}
 .app{display:flex;min-height:100vh;}
-
-.tile-pattern{
-  background-image:
-    radial-gradient(circle at 10px 10px, rgba(184,147,90,0.14) 2px, transparent 2.5px),
-    radial-gradient(circle at 30px 30px, rgba(184,147,90,0.14) 2px, transparent 2.5px);
-  background-size:40px 40px;
-}
 
 .sidebar{width:250px;flex-shrink:0;background:var(--teal);color:#F4EEE4;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;}
 .brand{padding:26px 22px 18px;border-bottom:1px solid rgba(244,238,228,0.15);}
-.brand-name{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:700;color:#F4EEE4;margin:0;line-height:1;letter-spacing:0.5px;}
-.brand-sub{margin:8px 0 0;font-size:12.5px;color:#C9BFA9;letter-spacing:0.3px;}
-.brand-divider{height:6px;margin-top:14px;border-radius:3px;background:linear-gradient(90deg, var(--gold) 0 12px, transparent 12px 20px) repeat-x;background-size:20px 6px;opacity:0.8;}
+.brand-name{font-size:32px;font-weight:700;color:#F4EEE4;margin:0;line-height:1;}
+.brand-sub{margin:8px 0 0;font-size:12px;color:#C9BFA9;}
 nav{flex:1;padding:14px 12px;overflow-y:auto;}
-.nav-item{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:var(--radius);color:#DCD3C2;cursor:pointer;font-size:15px;margin-bottom:2px;transition:background .15s;user-select:none;}
-.nav-item svg{width:19px;height:19px;flex-shrink:0;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:var(--radius);color:#DCD3C2;cursor:pointer;font-size:15px;margin-bottom:4px;transition:background .15s;}
 .nav-item:hover{background:rgba(244,238,228,0.08);}
-.nav-item.active{background:var(--teal-dark);color:#F4EEE4;border-inline-start:3px solid var(--gold);padding-inline-start:9px;}
-.sidebar-footer{padding:14px 20px 18px;font-size:11.5px;color:#9EAFA9;border-top:1px solid rgba(244,238,228,0.12);}
+.nav-item.active{background:var(--teal-dark);color:#F4EEE4;border-left:3px solid var(--gold);padding-left:9px;}
+.sidebar-footer{padding:14px 20px 18px;font-size:12px;color:#9EAFA9;border-top:1px solid rgba(244,238,228,0.12);}
 
 main{flex:1;padding:28px 34px;max-width:1200px;}
 .page-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:22px;flex-wrap:wrap;gap:12px;}
-.page-title{font-family:'Cormorant Garamond',serif;font-size:28px;margin:0;color:var(--teal-dark);}
-.page-desc{color:var(--ink-soft);font-size:13.5px;margin:4px 0 0;}
+.page-title{font-size:26px;margin:0;color:var(--teal-dark);}
+.page-desc{color:var(--ink-soft);font-size:13px;margin:4px 0 0;}
 
-.btn{border:none;border-radius:var(--radius);padding:9px 18px;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:filter .15s, transform .05s;}
-.btn:active{transform:translateY(1px);}
+.btn{border:none;border-radius:var(--radius);padding:9px 18px;font-size:14px;font-weight:700;cursor:pointer;}
 .btn-primary{background:var(--teal);color:#fff;}
-.btn-primary:hover{filter:brightness(1.12);}
 .btn-gold{background:var(--gold);color:#3A2C12;}
-.btn-gold:hover{filter:brightness(1.08);}
 .btn-outline{background:transparent;color:var(--teal);border:1.5px solid var(--teal);}
-.btn-outline:hover{background:rgba(27,75,74,0.06);}
 .btn-danger-text{background:transparent;color:var(--danger);border:none;padding:6px 8px;font-weight:500;cursor:pointer;}
 .btn-edit-text{background:transparent;color:var(--teal-light);border:none;padding:6px 8px;font-weight:500;cursor:pointer;}
 .btn-small{padding:6px 12px;font-size:13px;}
@@ -72,13 +56,13 @@ main{flex:1;padding:28px 34px;max-width:1200px;}
 .stat-card.rose{border-top-color:var(--rose);}
 .stat-card.gold{border-top-color:var(--gold);}
 .stat-label{font-size:13px;color:var(--ink-soft);margin:0 0 8px;}
-.stat-value{font-size:25px;font-weight:700;color:var(--teal-dark);margin:0;font-variant-numeric:tabular-nums;}
+.stat-value{font-size:24px;font-weight:700;color:var(--teal-dark);margin:0;}
 .stat-value.neg{color:var(--danger);}
 
 .table-wrap{overflow-x:auto;}
 table{width:100%;border-collapse:collapse;font-size:14px;}
 thead th{background:var(--teal);color:#F4EEE4;text-align:left;padding:11px 12px;font-weight:500;white-space:nowrap;}
-tbody td{padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap;font-variant-numeric:tabular-nums;}
+tbody td{padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap;}
 tbody tr:nth-child(even){background:var(--sand);}
 tbody tr:hover{background:#EFE2CE;}
 .empty-row td{text-align:center;color:var(--ink-soft);padding:26px;}
@@ -91,41 +75,36 @@ tbody tr:hover{background:#EFE2CE;}
 .modal h3{margin:0 0 18px;color:var(--teal-dark);font-size:18px;}
 .field{margin-bottom:14px;}
 .field label{display:block;font-size:13.5px;margin-bottom:6px;color:var(--ink-soft);}
-.field input, .field select, .field textarea{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:var(--radius);font-family:'Tajawal',sans-serif;font-size:14.5px;background:#fff;color:var(--ink);}
+.field input, .field select, .field textarea{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:var(--radius);font-size:14px;background:#fff;color:var(--ink);}
 .field textarea{resize:vertical;min-height:60px;}
 .modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px;}
 
 .inline-field{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
 .inline-field label{flex-shrink:0;font-size:14px;color:var(--ink-soft);min-width:220px;}
-.inline-field input{padding:8px 11px;border:1px solid var(--line);border-radius:var(--radius);font-family:'Tajawal',sans-serif;font-size:14.5px;max-width:180px;}
+.inline-field input{padding:8px 11px;border:1px solid var(--line);border-radius:var(--radius);font-size:14px;max-width:180px;}
 .helper-text{font-size:12.5px;color:var(--ink-soft);margin-top:4px;line-height:1.6;}
-.banner{background:#FBF3E4;border:1px solid var(--gold);color:#5C4A22;border-radius:var(--radius);padding:12px 16px;font-size:13.5px;margin-bottom:18px;line-height:1.7;}
 
-#loading{display:flex;align-items:center;justify-content:center;height:100vh;width:100%;font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--teal);}
+#loading{display:flex;align-items:center;justify-content:center;height:100vh;width:100%;font-size:22px;color:var(--teal);flex-direction:column;gap:15px;}
 
 @media (max-width:820px){
   .app{flex-direction:column;}
-  .sidebar{width:100%;height:auto;position:relative;flex-direction:row;align-items:center;}
-  .brand{border-bottom:none;padding:14px 16px;}
-  .brand-divider{display:none;}
+  .sidebar{width:100%;height:auto;position:relative;}
   nav{display:flex;overflow-x:auto;padding:8px;gap:4px;}
   .nav-item{flex-shrink:0;padding:9px 12px;}
-  .nav-item.active{border-inline-start:none;border-bottom:3px solid var(--gold);}
-  .sidebar-footer{display:none;}
+  .nav-item.active{border-left:none;border-bottom:3px solid var(--gold);}
   main{padding:20px 16px;}
 }
 </style>
 </head>
 <body>
 
-<div id="loading">Loading Mümkün data…</div>
+<div id="loading">Starting Mumkun Portal...</div>
 
 <div class="app" id="app" style="display:none;">
-  <aside class="sidebar tile-pattern">
+  <aside class="sidebar">
     <div class="brand">
-      <p class="brand-name">Mümkün</p>
-      <p class="brand-sub">Purchases, sales &amp; shipping manager</p>
-      <div class="brand-divider"></div>
+      <p class="brand-name">Mumkun</p>
+      <p class="brand-sub">Purchases, sales and shipping manager</p>
     </div>
     <nav id="nav"></nav>
     <div class="sidebar-footer" id="saveStatus">Saved automatically</div>
@@ -136,570 +115,697 @@ tbody tr:hover{background:#EFE2CE;}
 <div class="overlay" id="overlay"><div class="modal" id="modalBox"></div></div>
 
 <script>
-(function(){
-
-const ICONS = {
-  dashboard:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="5" rx="1.5"/><rect x="13" y="11" width="8" height="10" rx="1.5"/><rect x="3" y="14" width="8" height="7" rx="1.5"/></svg>',
-  suppliers:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 21V7l8-4 8 4v14"/><path d="M4 21h16"/><path d="M10 21v-5h4v5"/><path d="M9 10h.01M15 10h.01M9 14h.01M15 14h.01"/></svg>',
-  products:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>',
-  purchases:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h2l2.4 12.2a2 2 0 0 0 2 1.6h7.2a2 2 0 0 0 2-1.6L21 8H7"/><circle cx="9.5" cy="20.5" r="1.3"/><circle cx="17.5" cy="20.5" r="1.3"/><path d="M12 8v5m-2.2-2.2L12 13l2.2-2.2"/></svg>',
-  sales:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h2l2.4 12.2a2 2 0 0 0 2 1.6h7.2a2 2 0 0 0 2-1.6L21 8H7"/><circle cx="9.5" cy="20.5" r="1.3"/><circle cx="17.5" cy="20.5" r="1.3"/><path d="M12 13V8m2.2 2.2L12 8l-2.2 2.2"/></svg>',
-  shipping:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="7" width="12" height="9"/><path d="M13.5 10h4l3.5 3.5V16h-7.5z"/><circle cx="5.5" cy="18" r="1.7"/><circle cx="16.5" cy="18" r="1.7"/></svg>',
-  settings:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 13.8a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.03 1.56V20a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1.1-1.56 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.56-1.03H4a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.56-1.1 1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.87.34H10a1.7 1.7 0 0 0 1.03-1.56V4a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1.03 1.56 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87V10a1.7 1.7 0 0 0 1.56 1.03H20a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.51 1.03z"/></svg>'
+var db = {
+  meta: { exchangeRateTRYtoEGP: 1.5 },
+  suppliers: [],
+  products: [],
+  weightTiers: [],
+  shippingRates: { turkeyToEgyptPerKgTRY: 0 },
+  egyptCities: [],
+  purchases: [],
+  sales: []
 };
 
-const REF_LABEL = { suppliers:'name', products:'name', egyptCities:'city' };
+var currentTab = "dashboard";
+var editing = { type: null, id: null };
+var STORAGE_KEY = "mumkun_data";
 
-const SCHEMAS = {
-  suppliers:{ title:'Supplier', fields:[
-    {key:'name', label:'Supplier name', type:'text', required:true},
-    {key:'phone', label:'Phone number', type:'text'},
-    {key:'city', label:'City in Turkey', type:'text'},
-    {key:'notes', label:'Notes', type:'textarea'}
+var SCHEMAS = {
+  suppliers: { title: "Supplier", fields: [
+    {key: "name", label: "Supplier name", type: "text", required: true},
+    {key: "phone", label: "Phone number", type: "text"},
+    {key: "city", label: "City in Turkey", type: "text"},
+    {key: "notes", label: "Notes", type: "textarea"}
   ]},
-  products:{ title:'Product', fields:[
-    {key:'name', label:'Product name', type:'text', required:true},
-    {key:'category', label:'Category', type:'select', options:['Skincare','Clothing','Accessories','Other']},
-    {key:'supplierId', label:'Supplier', type:'ref', ref:'suppliers'},
-    {key:'unitWeightKg', label:'Weight per piece (kg)', type:'number', step:'0.01', required:true},
-    {key:'salePriceEGP', label:'Suggested sale price per piece (EGP)', type:'number', step:'0.01'},
-    {key:'notes', label:'Notes', type:'textarea'}
+  products: { title: "Product", fields: [
+    {key: "name", label: "Product name", type: "text", required: true},
+    {key: "category", label: "Category", type: "select", options: ["Skincare", "Clothing", "Accessories", "Other"]},
+    {key: "supplierId", label: "Supplier", type: "ref", ref: "suppliers"},
+    {key: "unitWeightKg", label: "Weight per piece (kg)", type: "number", step: "0.01", required: true},
+    {key: "salePriceEGP", label: "Suggested sale price per piece (EGP)", type: "number", step: "0.01"},
+    {key: "notes", label: "Notes", type: "textarea"}
   ]},
-  weightTiers:{ title:'Weight tier', fields:[
-    {key:'label', label:'Tier name', type:'text', required:true},
-    {key:'minKg', label:'From weight (kg)', type:'number', step:'0.01', required:true},
-    {key:'maxKg', label:'To weight (kg)', type:'number', step:'0.01', required:true},
-    {key:'pricePerKgTRY', label:'Price per kg — supplier / internal shipping (TRY)', type:'number', step:'0.01', required:true}
+  weightTiers: { title: "Weight tier", fields: [
+    {key: "label", label: "Tier name", type: "text", required: true},
+    {key: "minKg", label: "From weight (kg)", type: "number", step: "0.01", required: true},
+    {key: "maxKg", label: "To weight (kg)", type: "number", step: "0.01", required: true},
+    {key: "pricePerKgTRY", label: "Price per kg - internal shipping (TRY)", type: "number", step: "0.01", required: true}
   ]},
-  egyptCities:{ title:'Delivery city', fields:[
-    {key:'city', label:'City', type:'text', required:true},
-    {key:'priceEGP', label:'Actual courier delivery cost (EGP)', type:'number', step:'0.01', required:true}
+  egyptCities: { title: "Delivery city", fields: [
+    {key: "city", label: "City", type: "text", required: true},
+    {key: "priceEGP", label: "Actual delivery cost (EGP)", type: "number", step: "0.01", required: true}
   ]},
-  purchases:{ title:'Purchase', fields:[
-    {key:'date', label:'Date', type:'date', required:true},
-    {key:'supplierId', label:'Supplier', type:'ref', ref:'suppliers', required:true},
-    {key:'productId', label:'Product', type:'ref', ref:'products', required:true},
-    {key:'qty', label:'Quantity (pieces)', type:'number', step:'1', required:true},
-    {key:'unitPriceTRY', label:'Purchase price per piece from supplier (TRY)', type:'number', step:'0.01', required:true},
-    {key:'notes', label:'Notes', type:'textarea'}
+  purchases: { title: "Purchase", fields: [
+    {key: "date", label: "Date", type: "date", required: true},
+    {key: "supplierId", label: "Supplier", type: "ref", ref: "suppliers", required: true},
+    {key: "productId", label: "Product", type: "ref", ref: "products", required: true},
+    {key: "qty", label: "Quantity (pieces)", type: "number", step: "1", required: true},
+    {key: "unitPriceTRY", label: "Purchase price per piece (TRY)", type: "number", step: "0.01", required: true},
+    {key: "notes", label: "Notes", type: "textarea"}
   ]},
-  sales:{ title:'Sale', fields:[
-    {key:'date', label:'Date', type:'date', required:true},
-    {key:'customerName', label:'Customer name', type:'text', required:true},
-    {key:'phone', label:'Phone number', type:'text'},
-    {key:'productId', label:'Product', type:'ref', ref:'products', required:true},
-    {key:'qty', label:'Quantity', type:'number', step:'1', required:true},
-    {key:'unitPriceEGP', label:'Sale price per piece (EGP)', type:'number', step:'0.01', required:true},
-    {key:'cityId', label:'Delivery city', type:'ref', ref:'egyptCities', required:true},
-    {key:'deliveryChargedEGP', label:'Delivery fee charged to customer (EGP)', type:'number', step:'0.01'},
-    {key:'notes', label:'Notes', type:'textarea'}
+  sales: { title: "Sale", fields: [
+    {key: "date", label: "Date", type: "date", required: true},
+    {key: "customerName", label: "Customer name", type: "text", required: true},
+    {key: "phone", label: "Phone number", type: "text"},
+    {key: "productId", label: "Product", type: "ref", ref: "products", required: true},
+    {key: "qty", label: "Quantity", type: "number", step: "1", required: true},
+    {key: "unitPriceEGP", label: "Sale price per piece (EGP)", type: "number", step: "0.01", required: true},
+    {key: "cityId", label: "Delivery city", type: "ref", ref: "egyptCities", required: true},
+    {key: "deliveryChargedEGP", label: "Delivery charged to customer (EGP)", type: "number", step: "0.01"},
+    {key: "notes", label: "Notes", type: "textarea"}
   ]}
 };
 
-let db = null;
-let currentTab = 'dashboard';
-let editing = { type:null, id:null };
-const STORAGE_KEY = 'mumkun_data';
-let useSessionStorage = false;
+var TABS = [
+  {id: "dashboard", label: "Dashboard"},
+  {id: "suppliers", label: "Suppliers"},
+  {id: "products", label: "Products"},
+  {id: "purchases", label: "Purchases"},
+  {id: "sales", label: "Sales"},
+  {id: "shipping", label: "Shipping & Pricing"},
+  {id: "settings", label: "Settings & Backup"}
+];
 
-function defaultDB(){
-  return {
-    meta:{ exchangeRateTRYtoEGP: 1.5 },
-    suppliers:[], products:[], weightTiers:[],
-    shippingRates:{ turkeyToEgyptPerKgTRY: 0 },
-    egyptCities:[],
-    purchases:[], sales:[]
-  };
-}
-function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
+function uid(){ return Date.now().toString(36) + Math.random().toString(36).substr(2, 5); }
 
-async function loadDB(){
-  try{
-    const res = localStorage.getItem(STORAGE_KEY);
-    if(res){
-      const parsed = JSON.parse(res);
-      db = Object.assign(defaultDB(), parsed);
-      db.meta = Object.assign(defaultDB().meta, parsed.meta||{});
-      db.shippingRates = Object.assign(defaultDB().shippingRates, parsed.shippingRates||{});
-    } else {
-      db = defaultDB();
+function loadDB(){
+  try {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      var parsed = JSON.parse(raw);
+      if(parsed && typeof parsed === "object"){
+        for(var key in parsed){ db[key] = parsed[key]; }
+      }
     }
-  }catch(e){
-    console.warn("localStorage error. Using temporary memory.");
-    useSessionStorage = true;
-    db = defaultDB();
+  } catch(e) {
+    console.warn("Storage restricted, using session memory");
   }
 }
 
-async function saveDB(){
-  const statusEl = document.getElementById('saveStatus');
-  try{
-    if(statusEl) statusEl.textContent = 'Saving…';
-    if(!useSessionStorage){
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
-      if(statusEl) statusEl.textContent = 'Saved automatically ✓';
-    } else {
-      if(statusEl) statusEl.textContent = 'Please Export System Backup manually';
-    }
-  }catch(e){
-    if(statusEl) statusEl.textContent = 'Could not save — try again';
+function saveDB(){
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
+    var el = document.getElementById("saveStatus");
+    if(el) el.textContent = "Saved automatically";
+  } catch(e) {
+    var elErr = document.getElementById("saveStatus");
+    if(elErr) elErr.textContent = "Backup to JSON recommended";
   }
+}
+
+function fmt(n, decimals){
+  if(n === null || n === undefined || isNaN(n)) return "-";
+  var d = decimals !== undefined ? decimals : 2;
+  return Number(n).toFixed(d);
+}
+
+function refLabel(ref, id){
+  var arr = db[ref] || [];
+  for(var i = 0; i < arr.length; i++){
+    if(arr[i].id === id){
+      return arr[i].name || arr[i].city || "-";
+    }
+  }
+  return "-";
 }
 
 function findTier(weightKg){
-  return db.weightTiers.find(t => weightKg >= parseFloat(t.minKg) && weightKg <= parseFloat(t.maxKg)) || null;
-}
-function computePurchase(p){
-  const product = db.products.find(x=>x.id===p.productId);
-  const qty = parseFloat(p.qty)||0;
-  const unitWeight = product ? parseFloat(product.unitWeightKg)||0 : 0;
-  const totalWeight = qty*unitWeight;
-  const tier = findTier(unitWeight);
-  const internalRate = tier ? parseFloat(tier.pricePerKgTRY)||0 : 0;
-  const internalCostTRY = totalWeight*internalRate;
-  const intlRate = parseFloat(db.shippingRates.turkeyToEgyptPerKgTRY)||0;
-  const intlCostTRY = totalWeight*intlRate;
-  const productCostTRY = qty*(parseFloat(p.unitPriceTRY)||0);
-  const totalCostTRY = productCostTRY+internalCostTRY+intlCostTRY;
-  const rate = parseFloat(db.meta.exchangeRateTRYtoEGP)||0;
-  const totalCostEGP = totalCostTRY*rate;
-  const unitCostEGP = qty>0 ? totalCostEGP/qty : 0;
-  return { product, qty, totalWeight, tier, internalCostTRY, intlCostTRY, productCostTRY, totalCostTRY, totalCostEGP, unitCostEGP };
-}
-function getProductAvgCostEGP(productId){
-  const rel = db.purchases.filter(p=>p.productId===productId);
-  if(!rel.length) return null;
-  let totalQty=0, totalCost=0;
-  rel.forEach(p=>{ const c=computePurchase(p); totalQty+=c.qty; totalCost+=c.totalCostEGP; });
-  return totalQty>0 ? totalCost/totalQty : null;
-}
-function getProductStock(productId){
-  const bought = db.purchases.filter(p=>p.productId===productId).reduce((s,p)=>s+(parseFloat(p.qty)||0),0);
-  const sold = db.sales.filter(s=>s.productId===productId).reduce((s,x)=>s+(parseFloat(x.qty)||0),0);
-  return bought-sold;
-}
-function computeSale(s){
-  const product = db.products.find(x=>x.id===s.productId);
-  const city = db.egyptCities.find(c=>c.id===s.cityId);
-  const qty = parseFloat(s.qty)||0;
-  const revenue = qty*(parseFloat(s.unitPriceEGP)||0) + (parseFloat(s.deliveryChargedEGP)||0);
-  const avgCost = getProductAvgCostEGP(s.productId);
-  const cogs = avgCost!==null ? avgCost*qty : null;
-  const deliveryCost = city ? parseFloat(city.priceEGP)||0 : 0;
-  const profit = cogs!==null ? revenue-cogs-deliveryCost : null;
-  return { product, city, qty, revenue, cogs, deliveryCost, profit };
-}
-function fmt(n, decimals){
-  if(n===null||n===undefined||isNaN(n)) return '—';
-  return Number(n).toLocaleString('en-US',{minimumFractionDigits:decimals!==undefined?decimals:2, maximumFractionDigits:decimals!==undefined?decimals:2});
-}
-function refLabel(ref,id){
-  const item = (db[ref]||[]).find(x=>x.id===id);
-  if(!item) return '—';
-  return item[REF_LABEL[ref]] || '—';
+  for(var i = 0; i < db.weightTiers.length; i++){
+    var t = db.weightTiers[i];
+    if(weightKg >= parseFloat(t.minKg) && weightKg <= parseFloat(t.maxKg)){
+      return t;
+    }
+  }
+  return null;
 }
 
-const TABS = [
-  {id:'dashboard', label:'Dashboard'},
-  {id:'suppliers', label:'Suppliers'},
-  {id:'products', label:'Products'},
-  {id:'purchases', label:'Purchases'},
-  {id:'sales', label:'Sales'},
-  {id:'shipping', label:'Shipping & Pricing'},
-  {id:'settings', label:'Settings & Export'}
-];
+function computePurchase(p){
+  var product = null;
+  for(var i = 0; i < db.products.length; i++){
+    if(db.products[i].id === p.productId){ product = db.products[i]; break; }
+  }
+  var qty = parseFloat(p.qty) || 0;
+  var unitWeight = product ? (parseFloat(product.unitWeightKg) || 0) : 0;
+  var totalWeight = qty * unitWeight;
+  var tier = findTier(unitWeight);
+  var internalRate = tier ? (parseFloat(tier.pricePerKgTRY) || 0) : 0;
+  var internalCostTRY = totalWeight * internalRate;
+  var intlRate = parseFloat(db.shippingRates.turkeyToEgyptPerKgTRY) || 0;
+  var intlCostTRY = totalWeight * intlRate;
+  var productCostTRY = qty * (parseFloat(p.unitPriceTRY) || 0);
+  var totalCostTRY = productCostTRY + internalCostTRY + intlCostTRY;
+  var rate = parseFloat(db.meta.exchangeRateTRYtoEGP) || 0;
+  var totalCostEGP = totalCostTRY * rate;
+  var unitCostEGP = qty > 0 ? (totalCostEGP / qty) : 0;
+  return {
+    product: product,
+    qty: qty,
+    tier: tier,
+    internalCostTRY: internalCostTRY,
+    intlCostTRY: intlCostTRY,
+    totalCostEGP: totalCostEGP,
+    unitCostEGP: unitCostEGP
+  };
+}
+
+function getProductAvgCostEGP(productId){
+  var totalQty = 0;
+  var totalCost = 0;
+  for(var i = 0; i < db.purchases.length; i++){
+    if(db.purchases[i].productId === productId){
+      var c = computePurchase(db.purchases[i]);
+      totalQty += c.qty;
+      totalCost += c.totalCostEGP;
+    }
+  }
+  return totalQty > 0 ? (totalCost / totalQty) : null;
+}
+
+function getProductStock(productId){
+  var bought = 0;
+  var sold = 0;
+  for(var i = 0; i < db.purchases.length; i++){
+    if(db.purchases[i].productId === productId) bought += (parseFloat(db.purchases[i].qty) || 0);
+  }
+  for(var j = 0; j < db.sales.length; j++){
+    if(db.sales[j].productId === productId) sold += (parseFloat(db.sales[j].qty) || 0);
+  }
+  return bought - sold;
+}
+
+function computeSale(s){
+  var product = null;
+  for(var i = 0; i < db.products.length; i++){
+    if(db.products[i].id === s.productId){ product = db.products[i]; break; }
+  }
+  var city = null;
+  for(var j = 0; j < db.egyptCities.length; j++){
+    if(db.egyptCities[j].id === s.cityId){ city = db.egyptCities[j]; break; }
+  }
+  var qty = parseFloat(s.qty) || 0;
+  var revenue = qty * (parseFloat(s.unitPriceEGP) || 0) + (parseFloat(s.deliveryChargedEGP) || 0);
+  var avgCost = getProductAvgCostEGP(s.productId);
+  var cogs = avgCost !== null ? (avgCost * qty) : null;
+  var deliveryCost = city ? (parseFloat(city.priceEGP) || 0) : 0;
+  var profit = cogs !== null ? (revenue - cogs - deliveryCost) : null;
+  return { product: product, city: city, qty: qty, revenue: revenue, profit: profit, deliveryCost: deliveryCost };
+}
 
 function renderNav(){
-  const nav = document.getElementById('nav');
-  nav.innerHTML = TABS.map(t=>`<div class="nav-item ${t.id===currentTab?'active':''}" data-tab="${t.id}">${ICONS[t.id]}<span>${t.label}</span></div>`).join('');
-  nav.querySelectorAll('.nav-item').forEach(el=>{
-    el.addEventListener('click',()=>{ currentTab = el.dataset.tab; renderNav(); renderMain(); });
-  });
+  var nav = document.getElementById("nav");
+  nav.innerHTML = "";
+  for(var i = 0; i < TABS.length; i++){
+    (function(tab){
+      var div = document.createElement("div");
+      div.className = "nav-item" + (tab.id === currentTab ? " active" : "");
+      div.textContent = tab.label;
+      div.onclick = function(){
+        currentTab = tab.id;
+        renderNav();
+        renderMain();
+      };
+      nav.appendChild(div);
+    })(TABS[i]);
+  }
 }
 
 function openModal(type, id){
-  editing = {type, id};
-  const schema = SCHEMAS[type];
-  const record = id ? db[type].find(x=>x.id===id) : {};
-  const box = document.getElementById('modalBox');
-  box.innerHTML = `<h3>${id?'Edit':'Add'} ${schema.title}</h3><div id="formFields"></div>
-    <div class="modal-actions">
-      <button class="btn btn-outline" id="cancelBtn">Cancel</button>
-      <button class="btn btn-primary" id="saveBtn">Save</button>
-    </div>`;
-  const fieldsEl = box.querySelector('#formFields');
-  fieldsEl.innerHTML = schema.fields.map(f=>{
-    const val = record[f.key]!==undefined ? record[f.key] : '';
-    if(f.type==='textarea'){
-      return `<div class="field"><label>${f.label}</label><textarea data-key="${f.key}">${val}</textarea></div>`;
-    }
-    if(f.type==='select'){
-      return `<div class="field"><label>${f.label}</label><select data-key="${f.key}">
-        <option value="">— Select —</option>
-        ${f.options.map(o=>`<option value="${o}" ${val===o?'selected':''}>${o}</option>`).join('')}
-      </select></div>`;
-    }
-    if(f.type==='ref'){
-      const opts = db[f.ref].map(o=>`<option value="${o.id}" ${val===o.id?'selected':''}>${o[REF_LABEL[f.ref]]}</option>`).join('');
-      return `<div class="field"><label>${f.label}</label><select data-key="${f.key}"><option value="">— Select —</option>${opts}</select></div>`;
-    }
-    return `<div class="field"><label>${f.label}</label><input type="${f.type}" step="${f.step||''}" data-key="${f.key}" value="${val}"></div>`;
-  }).join('');
-  box.querySelector('#cancelBtn').addEventListener('click', closeModal);
-  box.querySelector('#saveBtn').addEventListener('click', ()=>submitForm(type,id));
-  document.getElementById('overlay').classList.add('show');
-}
-function closeModal(){ document.getElementById('overlay').classList.remove('show'); editing={type:null,id:null}; }
-
-async function submitForm(type, id){
-  const schema = SCHEMAS[type];
-  const box = document.getElementById('modalBox');
-  const data = {};
-  let missing = false;
-  schema.fields.forEach(f=>{
-    const el = box.querySelector(`[data-key="${f.key}"]`);
-    let v = el.value;
-    if(f.required && !v){ missing = true; el.style.borderColor='var(--danger)'; }
-    data[f.key] = v;
-  });
-  if(missing){ return; }
+  editing = { type: type, id: id };
+  var schema = SCHEMAS[type];
+  var record = {};
   if(id){
-    const idx = db[type].findIndex(x=>x.id===id);
-    db[type][idx] = Object.assign(db[type][idx], data);
+    for(var i = 0; i < db[type].length; i++){
+      if(db[type][i].id === id){ record = db[type][i]; break; }
+    }
+  }
+  var box = document.getElementById("modalBox");
+  box.innerHTML = "<h3>" + (id ? "Edit " : "Add ") + schema.title + "</h3><div id='formFields'></div>" +
+    "<div class='modal-actions'>" +
+      "<button class='btn btn-outline' id='cancelBtn'>Cancel</button>" +
+      "<button class='btn btn-primary' id='saveBtn'>Save</button>" +
+    "</div>";
+
+  var fieldsEl = box.querySelector("#formFields");
+  for(var f = 0; f < schema.fields.length; f++){
+    var field = schema.fields[f];
+    var val = record[field.key] !== undefined ? record[field.key] : "";
+    var wrap = document.createElement("div");
+    wrap.className = "field";
+    var lbl = document.createElement("label");
+    lbl.textContent = field.label;
+    wrap.appendChild(lbl);
+
+    if(field.type === "textarea"){
+      var txt = document.createElement("textarea");
+      txt.setAttribute("data-key", field.key);
+      txt.value = val;
+      wrap.appendChild(txt);
+    } else if(field.type === "select"){
+      var sel = document.createElement("select");
+      sel.setAttribute("data-key", field.key);
+      sel.innerHTML = "<option value=''>- Select -</option>";
+      for(var o = 0; o < field.options.length; o++){
+        var opt = document.createElement("option");
+        opt.value = field.options[o];
+        opt.textContent = field.options[o];
+        if(val === field.options[o]) opt.selected = true;
+        sel.appendChild(opt);
+      }
+      wrap.appendChild(sel);
+    } else if(field.type === "ref"){
+      var selRef = document.createElement("select");
+      selRef.setAttribute("data-key", field.key);
+      selRef.innerHTML = "<option value=''>- Select -</option>";
+      var refList = db[field.ref] || [];
+      for(var r = 0; r < refList.length; r++){
+        var optRef = document.createElement("option");
+        optRef.value = refList[r].id;
+        optRef.textContent = refList[r].name || refList[r].city || refList[r].label;
+        if(val === refList[r].id) optRef.selected = true;
+        selRef.appendChild(optRef);
+      }
+      wrap.appendChild(selRef);
+    } else {
+      var inp = document.createElement("input");
+      inp.type = field.type;
+      if(field.step) inp.step = field.step;
+      inp.setAttribute("data-key", field.key);
+      inp.value = val;
+      wrap.appendChild(inp);
+    }
+    fieldsEl.appendChild(wrap);
+  }
+
+  box.querySelector("#cancelBtn").onclick = closeModal;
+  box.querySelector("#saveBtn").onclick = function(){ submitForm(type, id); };
+  document.getElementById("overlay").className = "overlay show";
+}
+
+function closeModal(){
+  document.getElementById("overlay").className = "overlay";
+  editing = { type: null, id: null };
+}
+
+function submitForm(type, id){
+  var schema = SCHEMAS[type];
+  var box = document.getElementById("modalBox");
+  var data = {};
+  var missing = false;
+  for(var i = 0; i < schema.fields.length; i++){
+    var field = schema.fields[i];
+    var el = box.querySelector("[data-key='" + field.key + "']");
+    var v = el ? el.value : "";
+    if(field.required && !v){
+      missing = true;
+      if(el) el.style.borderColor = "var(--danger)";
+    }
+    data[field.key] = v;
+  }
+  if(missing) return;
+  if(id){
+    for(var j = 0; j < db[type].length; j++){
+      if(db[type][j].id === id){
+        for(var k in data){ db[type][j][k] = data[k]; }
+        break;
+      }
+    }
   } else {
     data.id = uid();
     db[type].push(data);
   }
-  await saveDB();
+  saveDB();
   closeModal();
   renderMain();
 }
-async function deleteRecord(type, id){
-  if(!confirm('Delete this record? This cannot be undone.')) return;
-  db[type] = db[type].filter(x=>x.id!==id);
-  await saveDB();
+
+function deleteRecord(type, id){
+  if(!confirm("Delete this record?")) return;
+  var next = [];
+  for(var i = 0; i < db[type].length; i++){
+    if(db[type][i].id !== id) next.push(db[type][i]);
+  }
+  db[type] = next;
+  saveDB();
   renderMain();
 }
 
 function renderMain(){
-  const main = document.getElementById('main');
-  if(currentTab==='dashboard') return renderDashboard(main);
-  if(currentTab==='suppliers') return renderSimpleTable(main,'suppliers','Suppliers','Your suppliers in Turkey and their contact details.',[
-    {h:'Name', k:'name'}, {h:'Phone', k:'phone'}, {h:'City', k:'city'}, {h:'Notes', k:'notes'}
-  ]);
-  if(currentTab==='products') return renderProducts(main);
-  if(currentTab==='purchases') return renderPurchases(main);
-  if(currentTab==='sales') return renderSales(main);
-  if(currentTab==='shipping') return renderShipping(main);
-  if(currentTab==='settings') return renderSettings(main);
-}
+  var main = document.getElementById("main");
+  main.innerHTML = "";
 
-function pageHeader(title, desc, btnLabel){
-  return `<div class="page-header">
-    <div><h2 class="page-title">${title}</h2><p class="page-desc">${desc}</p></div>
-    ${btnLabel? `<button class="btn btn-primary" id="addBtn">+ ${btnLabel}</button>` : ''}
-  </div>`;
-}
-
-function renderSimpleTable(main, type, title, desc, cols){
-  main.innerHTML = pageHeader(title, desc, SCHEMAS[type].title) +
-    `<div class="card"><div class="table-wrap"><table><thead><tr>
-      ${cols.map(c=>`<th>${c.h}</th>`).join('')}<th></th>
-    </tr></thead><tbody>
-      ${db[type].length? db[type].map(row=>`<tr>
-        ${cols.map(c=>`<td>${row[c.k]||'—'}</td>`).join('')}
-        <td><span class="btn-edit-text" data-edit="${row.id}">Edit</span><span class="btn-danger-text" data-del="${row.id}">Delete</span></td>
-      </tr>`).join('') : `<tr class="empty-row"><td colspan="${cols.length+1}">No records yet — click "+ ${SCHEMAS[type].title}" to add one.</td></tr>`}
-    </tbody></table></div></div>`;
-  wireTable(main, type);
-}
-
-function wireTable(main, type){
-  const addBtn = main.querySelector('#addBtn');
-  if(addBtn) addBtn.addEventListener('click',()=>openModal(type,null));
-  main.querySelectorAll('[data-edit]').forEach(el=>el.addEventListener('click',()=>openModal(type, el.dataset.edit)));
-  main.querySelectorAll('[data-del]').forEach(el=>el.addEventListener('click',()=>deleteRecord(type, el.dataset.del)));
-}
-
-function renderProducts(main){
-  main.innerHTML = pageHeader('Products','Skincare and clothing products, with per-piece weight and current stock.','Product') +
-    `<div class="card"><div class="table-wrap"><table><thead><tr>
-      <th>Name</th><th>Category</th><th>Supplier</th><th>Weight (kg)</th><th>Suggested price</th><th>Current stock</th><th>Avg. cost</th><th></th>
-    </tr></thead><tbody>
-    ${db.products.length? db.products.map(p=>{
-      const stock = getProductStock(p.id);
-      const avgCost = getProductAvgCostEGP(p.id);
-      return `<tr>
-        <td>${p.name}</td><td>${p.category\vert{}\vert{}'—'}</td><td>${refLabel('suppliers',p.supplierId)}</td>
-        <td>${fmt(p.unitWeightKg,2)}</td><td>${p.salePriceEGP?fmt(p.salePriceEGP,2)+' EGP':'—'}</td>
-        <td>${stock<=0?`<span class="tag warn">${stock} — out of stock</span>`:`<span class="tag">${stock}</span>`}</td>
-        <td>${avgCost!==null?fmt(avgCost,2)+' EGP':'—'}</td>
-        <td><span class="btn-edit-text" data-edit="${p.id}">Edit</span><span class="btn-danger-text" data-del="${p.id}">Delete</span></td>
-      </tr>`;
-    }).join('') : `<tr class="empty-row"><td colspan="8">No products yet.</td></tr>`}
-    </tbody></table></div></div>`;
-  wireTable(main,'products');
-}
-
-function renderPurchases(main){
-  main.innerHTML = pageHeader('Purchases','Every purchase from a supplier, with internal Turkey shipping and international shipping to Egypt calculated automatically by weight tier.','Purchase') +
-    `<div class="card"><div class="table-wrap"><table><thead><tr>
-      <th>Date</th><th>Supplier</th><th>Product</th><th>Qty</th><th>Price/pc (TRY)</th><th>Weight tier</th>
-      <th>Internal (Turkey)</th><th>International</th><th>Total (EGP)</th><th>Cost/pc (EGP)</th><th></th>
-    </tr></thead><tbody>
-    ${db.purchases.length? [...db.purchases].sort((a,b)=>b.date.localeCompare(a.date)).map(p=>{
-      const c = computePurchase(p);
-      return `<tr>
-        <td>${p.date}</td><td>${refLabel('suppliers',p.supplierId)}</td><td>${c.product?c.product.name:'—'}</td>
-        <td>${fmt(c.qty,0)}</td><td>${fmt(p.unitPriceTRY,2)}</td>
-        <td>${c.tier?`<span class="tag">${c.tier.label}</span>`:`<span class="tag warn">none</span>`}</td>
-        <td>${fmt(c.internalCostTRY,2)} TRY</td><td>${fmt(c.intlCostTRY,2)} TRY</td>
-        <td>${fmt(c.totalCostEGP,2)} EGP</td><td>${fmt(c.unitCostEGP,2)} EGP</td>
-        <td><span class="btn-edit-text" data-edit="${p.id}">Edit</span><span class="btn-danger-text" data-del="${p.id}">Delete</span></td>
-      </tr>`;
-    }).join('') : `<tr class="empty-row"><td colspan="11">No purchases yet.</td></tr>`}
-    </tbody></table></div></div>`;
-  wireTable(main,'purchases');
-}
-
-function renderSales(main){
-  main.innerHTML = pageHeader('Sales','Every sale to a customer, with Egypt delivery cost and approximate profit calculated automatically.','Sale') +
-    `<div class="card"><div class="table-wrap"><table><thead><tr>
-      <th>Date</th><th>Customer</th><th>Product</th><th>Qty</th><th>Price/pc</th><th>City</th>
-      <th>Delivery charged</th><th>Delivery cost</th><th>Revenue</th><th>Est. profit</th><th></th>
-    </tr></thead><tbody>
-    ${db.sales.length? [...db.sales].sort((a,b)=>b.date.localeCompare(a.date)).map(s=>{
-      const c = computeSale(s);
-      return `<tr>
-        <td>${s.date}</td><td>${s.customerName}</td><td>${c.product?c.product.name:'—'}</td>
-        <td>${fmt(c.qty,0)}</td><td>${fmt(s.unitPriceEGP,2)} EGP</td><td>${c.city?c.city.city:'—'}</td>
-        <td>${fmt(s.deliveryChargedEGP\vert{}\vert{}0,2)} EGP</td><td>${fmt(c.deliveryCost,2)} EGP</td>
-        <td>${fmt(c.revenue,2)} EGP</td>
-        <td>${c.profit!==null?`<span style="color:${c.profit>=0?'var(--success)':'var(--danger)'}">${fmt(c.profit,2)} EGP</span>`:'—'}</td>
-        <td><span class="btn-edit-text" data-edit="${s.id}">Edit</span><span class="btn-danger-text" data-del="${s.id}">Delete</span></td>
-      </tr>`;
-    }).join('') : `<tr class="empty-row"><td colspan="11">No sales yet.</td></tr>`}
-    </tbody></table></div></div>`;
-  wireTable(main,'sales');
-}
-
-function renderShipping(main){
-  main.innerHTML = `<div class="page-header"><div><h2 class="page-title">Shipping &amp; Pricing</h2>
-    <p class="page-desc">Internal Turkey shipping weight tiers, the international rate to Egypt, and per-city delivery costs in Egypt.</p></div></div>
-
-    <div class="card">
-      <h3>Internal shipping weight tiers (Turkey)</h3>
-      <p class="helper-text">Used to calculate the cost of moving a piece from the supplier to the cargo consolidation point inside Turkey, based on the weight of a single piece.</p>
-      <div class="table-wrap"><table><thead><tr><th>Tier</th><th>From (kg)</th><th>To (kg)</th><th>Price/kg (TRY)</th><th></th></tr></thead><tbody>
-      ${db.weightTiers.length? db.weightTiers.map(t=>`<tr>
-        <td>${t.label}</td><td>${fmt(t.minKg,2)}</td><td>${fmt(t.maxKg,2)}</td><td>${fmt(t.pricePerKgTRY,2)}</td>
-        <td><span class="btn-edit-text" data-edit-t="${t.id}">Edit</span><span class="btn-danger-text" data-del-t="${t.id}">Delete</span></td>
-      </tr>`).join('') : `<tr class="empty-row"><td colspan="5">No weight tiers added yet.</td></tr>`}
-      </tbody></table></div>
-      <div style="margin-top:12px;"><button class="btn btn-outline btn-small" id="addTierBtn">+ Add weight tier</button></div>
-    </div>
-
-    <div class="card">
-      <h3>International shipping rate (Turkey → Egypt)</h3>
-      <div class="inline-field"><label>Price per kilogram (TRY)</label>
-        <input type="number" step="0.01" id="intlRate" value="${db.shippingRates.turkeyToEgyptPerKgTRY}">
-      </div>
-      <button class="btn btn-primary btn-small" id="saveIntlRate">Save</button>
-    </div>
-
-    <div class="card">
-      <h3>Delivery costs inside Egypt (by city)</h3>
-      <div class="table-wrap"><table><thead><tr><th>City</th><th>Actual delivery cost (EGP)</th><th></th></tr></thead><tbody>
-      ${db.egyptCities.length? db.egyptCities.map(c=>`<tr>
-        <td>${c.city}</td><td>${fmt(c.priceEGP,2)}</td>
-        <td><span class="btn-edit-text" data-edit-c="${c.id}">Edit</span><span class="btn-danger-text" data-del-c="${c.id}">Delete</span></td>
-      </tr>`).join('') : `<tr class="empty-row"><td colspan="3">No cities added yet.</td></tr>`}
-      </tbody></table></div>
-      <div style="margin-top:12px;"><button class="btn btn-outline btn-small" id="addCityBtn">+ Add city</button></div>
-    </div>`;
-
-  main.querySelector('#addTierBtn').addEventListener('click',()=>openModal('weightTiers',null));
-  main.querySelectorAll('[data-edit-t]').forEach(el=>el.addEventListener('click',()=>openModal('weightTiers', el.dataset.editT)));
-  main.querySelectorAll('[data-del-t]').forEach(el=>el.addEventListener('click',()=>deleteRecord('weightTiers', el.dataset.delT)));
-  main.querySelector('#addCityBtn').addEventListener('click',()=>openModal('egyptCities',null));
-  main.querySelectorAll('[data-edit-c]').forEach(el=>el.addEventListener('click',()=>openModal('egyptCities', el.dataset.editC)));
-  main.querySelectorAll('[data-del-c]').forEach(el=>el.addEventListener('click',()=>deleteRecord('egyptCities', el.dataset.delC)));
-  main.querySelector('#saveIntlRate').addEventListener('click', async ()=>{
-    db.shippingRates.turkeyToEgyptPerKgTRY = parseFloat(main.querySelector('#intlRate').value)||0;
-    await saveDB(); renderMain();
-  });
-}
-
-function renderSettings(main){
-  main.innerHTML = `<div class="page-header"><div><h2 class="page-title">Settings &amp; Export</h2>
-    <p class="page-desc">Exchange rate, Excel reports, and System Backups.</p></div></div>
-
-    <div class="banner">📌 Your data is saved locally in this browser. To view your data on another device, use the export button below and send the file to your other device.</div>
-
-    <div class="card">
-      <h3>Exchange rate</h3>
-      <div class="inline-field"><label>Turkish Lira to Egyptian Pound rate</label>
-        <input type="number" step="0.0001" id="fxRate" value="${db.meta.exchangeRateTRYtoEGP}">
-      </div>
-      <button class="btn btn-primary btn-small" id="saveFx">Save exchange rate</button>
-    </div>
-
-    <div class="card">
-      <h3>Device Sync & System Restore</h3>
-      <p class="helper-text">Use this to move your exact app data to another device. Export the system file, send it to your other device, and restore it here.</p>
-      <div style="display:flex; gap:12px; margin-top:12px;">
-        <button class="btn btn-outline" id="exportJsonBtn">Export System Backup</button>
-        <label for="importJson" class="btn btn-outline" style="cursor:pointer; margin:0;">Restore System Backup</label>
-        <input type="file" id="importJson" accept=".json" style="display:none;">
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>Export Excel Report</h3>
-      <p class="helper-text">Creates a readable Excel file for your accounting and personal records.</p>
-      <button class="btn btn-gold" id="exportBtn">Download Excel Report</button>
-    </div>`;
-
-  main.querySelector('#saveFx').addEventListener('click', async ()=>{
-    db.meta.exchangeRateTRYtoEGP = parseFloat(main.querySelector('#fxRate').value)||0;
-    await saveDB(); renderMain();
-  });
-  
-  main.querySelector('#exportBtn').addEventListener('click', exportExcel);
-  
-  main.querySelector('#exportJsonBtn').addEventListener('click', ()=>{
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(db));
-    const downloadAnchorNode = document.createElement('a');
-    downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", "Mumkun_System_Backup.json");
-    document.body.appendChild(downloadAnchorNode);
-    downloadAnchorNode.click();
-    downloadAnchorNode.remove();
-  });
-
-  main.querySelector('#importJson').addEventListener('change', (e)=>{
-    const file = e.target.files[0];
-    if(!file) return;
-    const reader = new FileReader();
-    reader.onload = async (event) => {
-      try {
-        const importedData = JSON.parse(event.target.result);
-        if(importedData && importedData.meta && importedData.products) {
-          db = importedData;
-          await saveDB();
-          alert("System data successfully restored!");
-          renderMain();
-        } else {
-          alert("Invalid backup file.");
-        }
-      } catch (err) {
-        alert("Error reading the backup file.");
-      }
-    };
-    reader.readAsText(file);
-  });
+  if(currentTab === "dashboard"){
+    renderDashboard(main);
+  } else if(currentTab === "suppliers"){
+    renderSimpleTable(main, "suppliers", "Suppliers", "Registered suppliers in Turkey", [
+      {h: "Name", k: "name"}, {h: "Phone", k: "phone"}, {h: "City", k: "city"}, {h: "Notes", k: "notes"}
+    ]);
+  } else if(currentTab === "products"){
+    renderProducts(main);
+  } else if(currentTab === "purchases"){
+    renderPurchases(main);
+  } else if(currentTab === "sales"){
+    renderSales(main);
+  } else if(currentTab === "shipping"){
+    renderShipping(main);
+  } else if(currentTab === "settings"){
+    renderSettings(main);
+  }
 }
 
 function renderDashboard(main){
-  const totalRevenue = db.sales.reduce((s,x)=>s+computeSale(x).revenue,0);
-  const totalPurchaseCost = db.purchases.reduce((s,x)=>s+computePurchase(x).totalCostEGP,0);
-  const totalProfit = db.sales.reduce((s,x)=>{ const c=computeSale(x); return s+(c.profit||0); },0);
-  const inventoryValue = db.products.reduce((s,p)=>{
-    const stock = getProductStock(p.id); const avg = getProductAvgCostEGP(p.id)||0;
-    return s + (stock>0? stock*avg : 0);
-  },0);
+  var totalRevenue = 0;
+  var totalPurchaseCost = 0;
+  var totalProfit = 0;
+  for(var s = 0; s < db.sales.length; s++){
+    var sc = computeSale(db.sales[s]);
+    totalRevenue += sc.revenue;
+    if(sc.profit !== null) totalProfit += sc.profit;
+  }
+  for(var p = 0; p < db.purchases.length; p++){
+    totalPurchaseCost += computePurchase(db.purchases[p]).totalCostEGP;
+  }
+  var inventoryValue = 0;
+  for(var pr = 0; pr < db.products.length; pr++){
+    var st = getProductStock(db.products[pr].id);
+    var avg = getProductAvgCostEGP(db.products[pr].id) || 0;
+    if(st > 0) inventoryValue += (st * avg);
+  }
 
-  const salesByProduct = {};
-  db.sales.forEach(s=>{ salesByProduct[s.productId]=(salesByProduct[s.productId]||0)+(parseFloat(s.qty)||0); });
-  const topProducts = Object.entries(salesByProduct).sort((a,b)=>b[1]-a[1]).slice(0,5)
-    .map(([pid,qty])=>({ name: (db.products.find(p=>p.id===pid)||{}).name || '—', qty }));
-
-  const recent = [
-    ...db.purchases.map(p=>({date:p.date, type:'Purchase', desc:(db.products.find(x=>x.id===p.productId)||{}).name||'—'})),
-    ...db.sales.map(s=>({date:s.date, type:'Sale', desc:s.customerName}))
-  ].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,8);
-
-  main.innerHTML = `<div class="page-header"><div><h2 class="page-title">Dashboard</h2>
-    <p class="page-desc">An overview of Mümkün's performance.</p></div></div>
-
-    <div class="stat-grid">
-      <div class="stat-card"><p class="stat-label">Total sales revenue</p><p class="stat-value">${fmt(totalRevenue,2)} EGP</p></div>
-      <div class="stat-card rose"><p class="stat-label">Total purchase &amp; shipping cost</p><p class="stat-value">${fmt(totalPurchaseCost,2)} EGP</p></div>
-      <div class="stat-card gold"><p class="stat-label">Estimated net profit</p><p class="stat-value ${totalProfit<0?'neg':''}">${fmt(totalProfit,2)} EGP</p></div>
-      <div class="stat-card"><p class="stat-label">Current inventory value</p><p class="stat-value">${fmt(inventoryValue,2)} EGP</p></div>
-    </div>
-
-    <div class="card">
-      <h3>Best sellers</h3>
-      ${topProducts.length? `<div class="table-wrap"><table><thead><tr><th>Product</th><th>Quantity sold</th></tr></thead><tbody>
-        ${topProducts.map(t=>`<tr><td>${t.name}</td><td>${fmt(t.qty,0)}</td></tr>`).join('')}
-      </tbody></table></div>` : `<p class="helper-text">No sales recorded yet.</p>`}
-    </div>
-
-    <div class="card">
-      <h3>Recent activity</h3>
-      ${recent.length? `<div class="table-wrap"><table><thead><tr><th>Date</th><th>Type</th><th>Details</th></tr></thead><tbody>
-        ${recent.map(r=>`<tr><td>${r.date}</td><td><span class="tag">${r.type}</span></td><td>${r.desc}</td></tr>`).join('')}
-      </tbody></table></div>` : `<p class="helper-text">No activity yet. Start by adding suppliers and products, then record your first purchase.</p>`}
-    </div>`;
+  main.innerHTML = "<div class='page-header'><div><h2 class='page-title'>Dashboard</h2>" +
+    "<p class='page-desc'>Performance overview</p></div></div>" +
+    "<div class='stat-grid'>" +
+      "<div class='stat-card'><p class='stat-label'>Total Revenue</p><p class='stat-value'>" + fmt(totalRevenue, 2) + " EGP</p></div>" +
+      "<div class='stat-card rose'><p class='stat-label'>Total Costs</p><p class='stat-value'>" + fmt(totalPurchaseCost, 2) + " EGP</p></div>" +
+      "<div class='stat-card gold'><p class='stat-label'>Estimated Net Profit</p><p class='stat-value" + (totalProfit < 0 ? " neg" : "") + "'>" + fmt(totalProfit, 2) + " EGP</p></div>" +
+      "<div class='stat-card'><p class='stat-label'>Inventory Value</p><p class='stat-value'>" + fmt(inventoryValue, 2) + " EGP</p></div>" +
+    "</div>";
 }
 
-function exportExcel(){
-  const wb = XLSX.utils.book_new();
+function renderSimpleTable(main, type, title, desc, cols){
+  var header = "<div class='page-header'><div><h2 class='page-title'>" + title + "</h2>" +
+    "<p class='page-desc'>" + desc + "</p></div>" +
+    "<button class='btn btn-primary' id='addBtn'>+ Add " + SCHEMAS[type].title + "</button></div>";
 
-  const suppliersSheet = db.suppliers.map(s=>({'Name':s.name,'Phone':s.phone,'City':s.city,'Notes':s.notes}));
-  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(suppliersSheet), 'Suppliers');
+  var ths = "";
+  for(var c = 0; c < cols.length; c++) ths += "<th>" + cols[c].h + "</th>";
+  ths += "<th></th>";
 
-  const productsSheet = db.products.map(p=>({
-    'Name':p.name,'Category':p.category,'Supplier':refLabel('suppliers',p.supplierId),
-    'Weight (kg)':p.unitWeightKg,'Suggested price':p.salePriceEGP,
-    'Current stock':getProductStock(p.id), 'Avg. cost (EGP)':getProductAvgCostEGP(p.id)
-  }));
-  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(productsSheet), 'Products');
+  var rows = "";
+  if(db[type].length === 0){
+    rows = "<tr class='empty-row'><td colspan='" + (cols.length + 1) + "'>No records yet.</td></tr>";
+  } else {
+    for(var i = 0; i < db[type].length; i++){
+      var r = db[type][i];
+      rows += "<tr>";
+      for(var k = 0; k < cols.length; k++) rows += "<td>" + (r[cols[k].k] || "-") + "</td>";
+      rows += "<td><button class='btn-edit-text' data-id='" + r.id + "'>Edit</button>" +
+              "<button class='btn-danger-text' data-del='" + r.id + "'>Delete</button></td></tr>";
+    }
+  }
 
-  const tiersSheet = db.weightTiers.map(t=>({'Tier':t.label,'From (kg)':t.minKg,'To (kg)':t.maxKg,'Price/kg (TRY)':t.pricePerKgTRY}));
-  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(tiersSheet), 'Weight Tiers');
+  main.innerHTML = header + "<div class='card'><div class='table-wrap'><table><thead><tr>" + ths + "</tr></thead><tbody>" + rows + "</tbody></table></div></div>";
 
-  const citiesSheet = db.egyptCities.map(c=>({'City':c.city,'Delivery cost (EGP)':c.priceEGP}));
-  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(citiesSheet), 'Delivery Cities');
+  var addBtn = main.querySelector("#addBtn");
+  if(addBtn) addBtn.onclick = function(){ openModal(type, null); };
 
-  const purchasesSheet = db.purchases.map(p=>{
-    const c = computePurchase(p);
-    return {
-      'Date':p.date, 'Supplier':refLabel('suppliers',p.supplierId), 'Product': c.product?c.product.name:'',
-      'Qty':c.qty, 'Price/pc (TRY)':p.unitPriceTRY, 'Weight tier': c.tier?c.tier.label:'',
-      'Internal shipping (TRY)':c.internalCostTRY, 'International shipping (TRY)':c.intlCostTRY,
-      'Total (EGP)':c.totalCostEGP, 'Cost/pc (EGP)':c.unitCostEGP, 'Notes':p.notes
-    };
-  });
-  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(purchasesSheet), 'Purchases');
-
-  const salesSheet = db.sales.map(s=>{
-    const c = computeSale(s);
-    return {
-      'Date':s.date, 'Customer':s.customerName, 'Phone':s.phone, 'Product': c.product?c.product.name:'',
-      'Qty':c.qty, 'Price/pc (EGP)':s.unitPriceEGP, 'City': c.city?c.city.city:'',
-      'Delivery charged (EGP)':s.deliveryChargedEGP||0, 'Delivery cost (EGP)':c.deliveryCost,
-      'Revenue (EGP)':c.revenue, 'Estimated profit (EGP)':c.profit, 'Notes':s.notes
-    };
-  });
-  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(salesSheet), 'Sales');
-
-  const dateStr = new Date().toISOString().slice(0,10);
-  XLSX.writeFile(wb, `Mumkun-Backup-${dateStr}.xlsx`);
+  var edits = main.querySelectorAll(".btn-edit-text");
+  for(var e = 0; e < edits.length; e++){
+    edits[e].onclick = function(){ openModal(type, this.getAttribute("data-id")); };
+  }
+  var dels = main.querySelectorAll(".btn-danger-text");
+  for(var d = 0; d < dels.length; d++){
+    dels[d].onclick = function(){ deleteRecord(type, this.getAttribute("data-del")); };
+  }
 }
 
-async function init(){
-  await loadDB();
-  document.getElementById('loading').style.display='none';
-  document.getElementById('app').style.display='flex';
+function renderProducts(main){
+  var header = "<div class='page-header'><div><h2 class='page-title'>Products</h2>" +
+    "<p class='page-desc'>Catalog and stock tracking</p></div>" +
+    "<button class='btn btn-primary' id='addBtn'>+ Add Product</button></div>";
+
+  var rows = "";
+  if(db.products.length === 0){
+    rows = "<tr class='empty-row'><td colspan='7'>No products recorded.</td></tr>";
+  } else {
+    for(var i = 0; i < db.products.length; i++){
+      var p = db.products[i];
+      var stock = getProductStock(p.id);
+      var avgCost = getProductAvgCostEGP(p.id);
+      rows += "<tr>" +
+        "<td>" + p.name + "</td>" +
+        "<td>" + (p.category || "-") + "</td>" +
+        "<td>" + refLabel("suppliers", p.supplierId) + "</td>" +
+        "<td>" + fmt(p.unitWeightKg, 2) + " kg</td>" +
+        "<td>" + (p.salePriceEGP ? fmt(p.salePriceEGP, 2) + " EGP" : "-") + "</td>" +
+        "<td><span class='tag" + (stock <= 0 ? " warn" : "") + "'>" + stock + "</span></td>" +
+        "<td>" + (avgCost !== null ? fmt(avgCost, 2) + " EGP" : "-") + "</td>" +
+        "<td><button class='btn-edit-text' data-id='" + p.id + "'>Edit</button>" +
+            "<button class='btn-danger-text' data-del='" + p.id + "'>Delete</button></td>" +
+      "</tr>";
+    }
+  }
+
+  main.innerHTML = header + "<div class='card'><div class='table-wrap'><table><thead><tr>" +
+    "<th>Name</th><th>Category</th><th>Supplier</th><th>Weight</th><th>Price</th><th>Stock</th><th>Avg Cost</th><th></th>" +
+    "</tr></thead><tbody>" + rows + "</tbody></table></div></div>";
+
+  var addBtn = main.querySelector("#addBtn");
+  if(addBtn) addBtn.onclick = function(){ openModal("products", null); };
+
+  var edits = main.querySelectorAll(".btn-edit-text");
+  for(var e = 0; e < edits.length; e++){
+    edits[e].onclick = function(){ openModal("products", this.getAttribute("data-id")); };
+  }
+  var dels = main.querySelectorAll(".btn-danger-text");
+  for(var d = 0; d < dels.length; d++){
+    dels[d].onclick = function(){ deleteRecord("products", this.getAttribute("data-del")); };
+  }
+}
+
+function renderPurchases(main){
+  var header = "<div class='page-header'><div><h2 class='page-title'>Purchases</h2>" +
+    "<p class='page-desc'>Supplier order history and landing costs</p></div>" +
+    "<button class='btn btn-primary' id='addBtn'>+ Add Purchase</button></div>";
+
+  var rows = "";
+  if(db.purchases.length === 0){
+    rows = "<tr class='empty-row'><td colspan='8'>No purchases recorded.</td></tr>";
+  } else {
+    for(var i = 0; i < db.purchases.length; i++){
+      var p = db.purchases[i];
+      var c = computePurchase(p);
+      rows += "<tr>" +
+        "<td>" + p.date + "</td>" +
+        "<td>" + refLabel("suppliers", p.supplierId) + "</td>" +
+        "<td>" + (c.product ? c.product.name : "-") + "</td>" +
+        "<td>" + fmt(c.qty, 0) + "</td>" +
+        "<td>" + fmt(p.unitPriceTRY, 2) + " TRY</td>" +
+        "<td>" + fmt(c.totalCostEGP, 2) + " EGP</td>" +
+        "<td>" + fmt(c.unitCostEGP, 2) + " EGP</td>" +
+        "<td><button class='btn-edit-text' data-id='" + p.id + "'>Edit</button>" +
+            "<button class='btn-danger-text' data-del='" + p.id + "'>Delete</button></td>" +
+      "</tr>";
+    }
+  }
+
+  main.innerHTML = header + "<div class='card'><div class='table-wrap'><table><thead><tr>" +
+    "<th>Date</th><th>Supplier</th><th>Product</th><th>Qty</th><th>Price TRY</th><th>Total EGP</th><th>Unit Cost EGP</th><th></th>" +
+    "</tr></thead><tbody>" + rows + "</tbody></table></div></div>";
+
+  var addBtn = main.querySelector("#addBtn");
+  if(addBtn) addBtn.onclick = function(){ openModal("purchases", null); };
+
+  var edits = main.querySelectorAll(".btn-edit-text");
+  for(var e = 0; e < edits.length; e++){
+    edits[e].onclick = function(){ openModal("purchases", this.getAttribute("data-id")); };
+  }
+  var dels = main.querySelectorAll(".btn-danger-text");
+  for(var d = 0; d < dels.length; d++){
+    dels[d].onclick = function(){ deleteRecord("purchases", this.getAttribute("data-del")); };
+  }
+}
+
+function renderSales(main){
+  var header = "<div class='page-header'><div><h2 class='page-title'>Sales</h2>" +
+    "<p class='page-desc'>Customer sales and profit calculation</p></div>" +
+    "<button class='btn btn-primary' id='addBtn'>+ Add Sale</button></div>";
+
+  var rows = "";
+  if(db.sales.length === 0){
+    rows = "<tr class='empty-row'><td colspan='8'>No sales recorded.</td></tr>";
+  } else {
+    for(var i = 0; i < db.sales.length; i++){
+      var s = db.sales[i];
+      var c = computeSale(s);
+      rows += "<tr>" +
+        "<td>" + s.date + "</td>" +
+        "<td>" + s.customerName + "</td>" +
+        "<td>" + (c.product ? c.product.name : "-") + "</td>" +
+        "<td>" + fmt(c.qty, 0) + "</td>" +
+        "<td>" + fmt(s.unitPriceEGP, 2) + " EGP</td>" +
+        "<td>" + fmt(c.revenue, 2) + " EGP</td>" +
+        "<td><span style='color:" + (c.profit >= 0 ? "var(--success)" : "var(--danger)") + ";'>" + fmt(c.profit, 2) + " EGP</span></td>" +
+        "<td><button class='btn-edit-text' data-id='" + s.id + "'>Edit</button>" +
+            "<button class='btn-danger-text' data-del='" + s.id + "'>Delete</button></td>" +
+      "</tr>";
+    }
+  }
+
+  main.innerHTML = header + "<div class='card'><div class='table-wrap'><table><thead><tr>" +
+    "<th>Date</th><th>Customer</th><th>Product</th><th>Qty</th><th>Unit Price</th><th>Revenue</th><th>Est. Profit</th><th></th>" +
+    "</tr></thead><tbody>" + rows + "</tbody></table></div></div>";
+
+  var addBtn = main.querySelector("#addBtn");
+  if(addBtn) addBtn.onclick = function(){ openModal("sales", null); };
+
+  var edits = main.querySelectorAll(".btn-edit-text");
+  for(var e = 0; e < edits.length; e++){
+    edits[e].onclick = function(){ openModal("sales", this.getAttribute("data-id")); };
+  }
+  var dels = main.querySelectorAll(".btn-danger-text");
+  for(var d = 0; d < dels.length; d++){
+    dels[d].onclick = function(){ deleteRecord("sales", this.getAttribute("data-del")); };
+  }
+}
+
+function renderShipping(main){
+  main.innerHTML = "<div class='page-header'><div><h2 class='page-title'>Shipping & Pricing</h2>" +
+    "<p class='page-desc'>Weight tiers and delivery setup</p></div></div>" +
+    "<div class='card'>" +
+      "<h3>Internal Turkey Weight Tiers</h3>" +
+      "<div style='margin-bottom:12px;'><button class='btn btn-outline btn-small' id='addTierBtn'>+ Add Weight Tier</button></div>" +
+      "<div class='table-wrap'><table id='tierTable'><thead><tr><th>Tier</th><th>Min kg</th><th>Max kg</th><th>TRY/kg</th><th></th></tr></thead><tbody></tbody></table></div>" +
+    "</div>" +
+    "<div class='card'>" +
+      "<h3>International Shipping Rate (Turkey to Egypt)</h3>" +
+      "<div class='inline-field'><label>Rate per kg (TRY)</label><input type='number' step='0.01' id='intlRate' value='" + (db.shippingRates.turkeyToEgyptPerKgTRY || 0) + "'></div>" +
+      "<button class='btn btn-primary btn-small' id='saveIntlBtn'>Save Rate</button>" +
+    "</div>" +
+    "<div class='card'>" +
+      "<h3>Egypt Domestic Delivery (by City)</h3>" +
+      "<div style='margin-bottom:12px;'><button class='btn btn-outline btn-small' id='addCityBtn'>+ Add City</button></div>" +
+      "<div class='table-wrap'><table id='cityTable'><thead><tr><th>City</th><th>Cost (EGP)</th><th></th></tr></thead><tbody></tbody></table></div>" +
+    "</div>";
+
+  var tBody = main.querySelector("#tierTable tbody");
+  if(db.weightTiers.length === 0){
+    tBody.innerHTML = "<tr class='empty-row'><td colspan='5'>No weight tiers.</td></tr>";
+  } else {
+    for(var i = 0; i < db.weightTiers.length; i++){
+      var t = db.weightTiers[i];
+      tBody.innerHTML += "<tr><td>" + t.label + "</td><td>" + fmt(t.minKg, 2) + "</td><td>" + fmt(t.maxKg, 2) + "</td><td>" + fmt(t.pricePerKgTRY, 2) + "</td>" +
+        "<td><button class='btn-edit-text' data-id='" + t.id + "'>Edit</button><button class='btn-danger-text' data-del='" + t.id + "'>Delete</button></td></tr>";
+    }
+  }
+
+  var cBody = main.querySelector("#cityTable tbody");
+  if(db.egyptCities.length === 0){
+    cBody.innerHTML = "<tr class='empty-row'><td colspan='3'>No cities registered.</td></tr>";
+  } else {
+    for(var j = 0; j < db.egyptCities.length; j++){
+      var c = db.egyptCities[j];
+      cBody.innerHTML += "<tr><td>" + c.city + "</td><td>" + fmt(c.priceEGP, 2) + " EGP</td>" +
+        "<td><button class='btn-edit-text' data-id='" + c.id + "'>Edit</button><button class='btn-danger-text' data-del='" + c.id + "'>Delete</button></td></tr>";
+    }
+  }
+
+  main.querySelector("#addTierBtn").onclick = function(){ openModal("weightTiers", null); };
+  main.querySelector("#addCityBtn").onclick = function(){ openModal("egyptCities", null); };
+  main.querySelector("#saveIntlBtn").onclick = function(){
+    db.shippingRates.turkeyToEgyptPerKgTRY = parseFloat(main.querySelector("#intlRate").value) || 0;
+    saveDB();
+    renderMain();
+  };
+
+  var tEdits = main.querySelectorAll("#tierTable .btn-edit-text");
+  for(var te = 0; te < tEdits.length; te++){
+    tEdits[te].onclick = function(){ openModal("weightTiers", this.getAttribute("data-id")); };
+  }
+  var tDels = main.querySelectorAll("#tierTable .btn-danger-text");
+  for(var td = 0; td < tDels.length; td++){
+    tDels[td].onclick = function(){ deleteRecord("weightTiers", this.getAttribute("data-del")); };
+  }
+
+  var cEdits = main.querySelectorAll("#cityTable .btn-edit-text");
+  for(var ce = 0; ce < cEdits.length; ce++){
+    cEdits[ce].onclick = function(){ openModal("egyptCities", this.getAttribute("data-id")); };
+  }
+  var cDels = main.querySelectorAll("#cityTable .btn-danger-text");
+  for(var cd = 0; cd < cDels.length; cd++){
+    cDels[cd].onclick = function(){ deleteRecord("egyptCities", this.getAttribute("data-del")); };
+  }
+}
+
+function renderSettings(main){
+  main.innerHTML = "<div class='page-header'><div><h2 class='page-title'>Settings & Backup</h2>" +
+    "<p class='page-desc'>Currency rate and cross-device sync</p></div></div>" +
+    "<div class='card'>" +
+      "<h3>Currency Exchange</h3>" +
+      "<div class='inline-field'><label>TRY to EGP Exchange Rate</label><input type='number' step='0.0001' id='fxRate' value='" + (db.meta.exchangeRateTRYtoEGP || 1.5) + "'></div>" +
+      "<button class='btn btn-primary btn-small' id='saveFxBtn'>Save Exchange Rate</button>" +
+    "</div>" +
+    "<div class='card'>" +
+      "<h3>Cross-Device Sync & Data Backup</h3>" +
+      "<p class='helper-text'>Export your backup JSON file to load your business data on your phone or other browsers.</p>" +
+      "<div style='display:flex; gap:12px; margin-top:14px;'>" +
+        "<button class='btn btn-outline' id='exportJsonBtn'>Export System Backup</button>" +
+        "<label for='importJson' class='btn btn-outline' style='cursor:pointer;'>Restore System Backup</label>" +
+        "<input type='file' id='importJson' accept='.json' style='display:none;'>" +
+      "</div>" +
+    "</div>";
+
+  main.querySelector("#saveFxBtn").onclick = function(){
+    db.meta.exchangeRateTRYtoEGP = parseFloat(main.querySelector("#fxRate").value) || 1.5;
+    saveDB();
+    renderMain();
+  };
+
+  main.querySelector("#exportJsonBtn").onclick = function(){
+    var blob = new Blob([JSON.stringify(db, null, 2)], { type: "application/json" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "Mumkun_Backup_" + new Date().toISOString().slice(0, 10) + ".json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  main.querySelector("#importJson").onchange = function(e){
+    var file = e.target.files[0];
+    if(!file) return;
+    var reader = new FileReader();
+    reader.onload = function(evt){
+      try {
+        var imported = JSON.parse(evt.target.result);
+        if(imported && imported.meta){
+          db = imported;
+          saveDB();
+          alert("Backup restored successfully!");
+          renderMain();
+        } else {
+          alert("Invalid backup file structure.");
+        }
+      } catch(err){
+        alert("Failed to parse JSON backup.");
+      }
+    };
+    reader.readAsText(file);
+  };
+}
+
+function init(){
+  loadDB();
+  var lEl = document.getElementById("loading");
+  if(lEl) lEl.style.display = "none";
+  var appEl = document.getElementById("app");
+  if(appEl) appEl.style.display = "flex";
   renderNav();
   renderMain();
 }
 
-init();
-
-})();
+window.onload = init;
 </script>
 </body>
 </html>
