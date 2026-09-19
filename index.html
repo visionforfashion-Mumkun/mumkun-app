@@ -200,6 +200,7 @@ let db = null;
 let currentTab = 'dashboard';
 let editing = { type:null, id:null };
 const STORAGE_KEY = 'mumkun_data';
+let useSessionStorage = false;
 
 function defaultDB(){
   return {
@@ -224,15 +225,22 @@ async function loadDB(){
       db = defaultDB();
     }
   }catch(e){
+    console.warn("localStorage error. Using temporary memory.");
+    useSessionStorage = true;
     db = defaultDB();
   }
 }
+
 async function saveDB(){
   const statusEl = document.getElementById('saveStatus');
   try{
     if(statusEl) statusEl.textContent = 'Saving…';
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
-    if(statusEl) statusEl.textContent = 'Saved automatically ✓';
+    if(!useSessionStorage){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
+      if(statusEl) statusEl.textContent = 'Saved automatically ✓';
+    } else {
+      if(statusEl) statusEl.textContent = 'Please Export System Backup manually';
+    }
   }catch(e){
     if(statusEl) statusEl.textContent = 'Could not save — try again';
   }
@@ -526,6 +534,8 @@ function renderSettings(main){
   main.innerHTML = `<div class="page-header"><div><h2 class="page-title">Settings &amp; Export</h2>
     <p class="page-desc">Exchange rate, Excel reports, and System Backups.</p></div></div>
 
+    <div class="banner">📌 Your data is saved locally in this browser. To view your data on another device, use the export button below and send the file to your other device.</div>
+
     <div class="card">
       <h3>Exchange rate</h3>
       <div class="inline-field"><label>Turkish Lira to Egyptian Pound rate</label>
@@ -536,10 +546,10 @@ function renderSettings(main){
 
     <div class="card">
       <h3>Device Sync & System Restore</h3>
-      <p class="helper-text">Use this to move your exact app data to another device (like from your laptop to your phone). Export the system file, send it to your other device, and restore it here.</p>
+      <p class="helper-text">Use this to move your exact app data to another device. Export the system file, send it to your other device, and restore it here.</p>
       <div style="display:flex; gap:12px; margin-top:12px;">
-        <button class="btn btn-outline" id="exportJsonBtn">📤 Export System Backup</button>
-        <label for="importJson" class="btn btn-outline" style="cursor:pointer; margin:0;">📥 Restore System Backup</label>
+        <button class="btn btn-outline" id="exportJsonBtn">Export System Backup</button>
+        <label for="importJson" class="btn btn-outline" style="cursor:pointer; margin:0;">Restore System Backup</label>
         <input type="file" id="importJson" accept=".json" style="display:none;">
       </div>
     </div>
@@ -547,7 +557,7 @@ function renderSettings(main){
     <div class="card">
       <h3>Export Excel Report</h3>
       <p class="helper-text">Creates a readable Excel file for your accounting and personal records.</p>
-      <button class="btn btn-gold" id="exportBtn">⬇ Download Excel Report</button>
+      <button class="btn btn-gold" id="exportBtn">Download Excel Report</button>
     </div>`;
 
   main.querySelector('#saveFx').addEventListener('click', async ()=>{
@@ -577,13 +587,13 @@ function renderSettings(main){
         if(importedData && importedData.meta && importedData.products) {
           db = importedData;
           await saveDB();
-          alert("✅ System data successfully restored!");
+          alert("System data successfully restored!");
           renderMain();
         } else {
-          alert("❌ Invalid backup file.");
+          alert("Invalid backup file.");
         }
       } catch (err) {
-        alert("❌ Error reading the backup file.");
+        alert("Error reading the backup file.");
       }
     };
     reader.readAsText(file);
@@ -686,6 +696,7 @@ async function init(){
   renderNav();
   renderMain();
 }
+
 init();
 
 })();
