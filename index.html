@@ -524,30 +524,70 @@ function renderShipping(main){
 
 function renderSettings(main){
   main.innerHTML = `<div class="page-header"><div><h2 class="page-title">Settings &amp; Export</h2>
-    <p class="page-desc">Exchange rate, and a full backup of all your data as an Excel file.</p></div></div>
-
-    <div class="banner">📌 Your data is saved locally in this browser. To view your data on another device, use the export button below and send the file to your other device.</div>
+    <p class="page-desc">Exchange rate, Excel reports, and System Backups.</p></div></div>
 
     <div class="card">
       <h3>Exchange rate</h3>
       <div class="inline-field"><label>Turkish Lira to Egyptian Pound rate</label>
         <input type="number" step="0.0001" id="fxRate" value="${db.meta.exchangeRateTRYtoEGP}">
       </div>
-      <p class="helper-text">Used to convert purchase and shipping costs from Turkish Lira to Egyptian Pounds throughout the app.</p>
       <button class="btn btn-primary btn-small" id="saveFx">Save exchange rate</button>
     </div>
 
     <div class="card">
-      <h3>Export all data to Excel</h3>
-      <p class="helper-text">Creates one Excel file with a separate sheet for: Suppliers, Products, Weight Tiers, Delivery Cities, Purchases (with calculations), and Sales (with profit).</p>
-      <button class="btn btn-gold" id="exportBtn">⬇ Download Excel backup now</button>
+      <h3>Device Sync & System Restore</h3>
+      <p class="helper-text">Use this to move your exact app data to another device (like from your laptop to your phone). Export the system file, send it to your other device, and restore it here.</p>
+      <div style="display:flex; gap:12px; margin-top:12px;">
+        <button class="btn btn-outline" id="exportJsonBtn">📤 Export System Backup</button>
+        <label for="importJson" class="btn btn-outline" style="cursor:pointer; margin:0;">📥 Restore System Backup</label>
+        <input type="file" id="importJson" accept=".json" style="display:none;">
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Export Excel Report</h3>
+      <p class="helper-text">Creates a readable Excel file for your accounting and personal records.</p>
+      <button class="btn btn-gold" id="exportBtn">⬇ Download Excel Report</button>
     </div>`;
 
   main.querySelector('#saveFx').addEventListener('click', async ()=>{
     db.meta.exchangeRateTRYtoEGP = parseFloat(main.querySelector('#fxRate').value)||0;
     await saveDB(); renderMain();
   });
+  
   main.querySelector('#exportBtn').addEventListener('click', exportExcel);
+  
+  main.querySelector('#exportJsonBtn').addEventListener('click', ()=>{
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(db));
+    const downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href", dataStr);
+    downloadAnchorNode.setAttribute("download", "Mumkun_System_Backup.json");
+    document.body.appendChild(downloadAnchorNode);
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+  });
+
+  main.querySelector('#importJson').addEventListener('change', (e)=>{
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = async (event) => {
+      try {
+        const importedData = JSON.parse(event.target.result);
+        if(importedData && importedData.meta && importedData.products) {
+          db = importedData;
+          await saveDB();
+          alert("✅ System data successfully restored!");
+          renderMain();
+        } else {
+          alert("❌ Invalid backup file.");
+        }
+      } catch (err) {
+        alert("❌ Error reading the backup file.");
+      }
+    };
+    reader.readAsText(file);
+  });
 }
 
 function renderDashboard(main){
